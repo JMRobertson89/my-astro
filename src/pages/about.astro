@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 const pageTitle = 'About Me';
 
 const identity = {
@@ -8,11 +10,21 @@ const identity = {
 	hobbies: ['crossfit', 'coding', 'running'],
 };
 
-const skills = ['HTML', 'CSS', 'JavaScript', 'React', 'Astro'];
+const skills = [
+	{ name: 'HTML', color: 'red' },
+	{ name: 'CSS', color: 'green' },
+	{ name: 'JavaScript', color: 'yellowgreen' },
+	{ name: 'React', color: 'blue' },
+	{ name: 'Astro', color: 'black' },
+];
 
 const happy = true;
 const finished = false;
 const goal = 3;
+
+const skillColor = 'crimson';
+const fontWeight = 'bold';
+const textCase = 'uppercase';
 ---
 
 <html lang="en">
@@ -20,6 +32,16 @@ const goal = 3;
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>{pageTitle}</title>
+		<style define:vars={{ fontWeight, textCase }}>
+			h1 {
+				color: purple;
+				font-size: 4rem;
+			}
+			.skill {
+				font-weight: var(--fontWeight);
+				text-transform: var(--textCase);
+			}
+		</style>
 	</head>
 	<body>
 		<a href="/">Home</a>
@@ -55,10 +77,22 @@ const goal = 3;
 		</ul>
 		<p>My skills are:</p>
 		<ul>
-			{skills.map((skill) => <li>{skill}</li>)}
+			{
+				skills.map((skill) => (
+					<li class="skill" style={`color: ${skill.color}`}>
+						{skill.name}
+					</li>
+				))
+			}
 		</ul>
-    {happy && <p>I am happy to be learning Astro!</p> }
-    {finished && <p>I Finsidhed this tutorial!</p> }
-    {goal === 3 ? <p>My goals is to finish in 3 days.</p> : <p>My goal is not 3 days.</p> }
+		{happy && <p>I am happy to be learning Astro!</p>}
+		{finished && <p>I Finsidhed this tutorial!</p>}
+		{
+			goal === 3 ? (
+				<p>My goals is to finish in 3 days.</p>
+			) : (
+				<p>My goal is not 3 days.</p>
+			)
+		}
 	</body>
 </html>
